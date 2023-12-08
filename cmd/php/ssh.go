@@ -1,5 +1,5 @@
 package main
 
-func GetSSH() {
-
+func GetSSH(config *AppConfig) {
+	
 }

@@ -9,12 +9,12 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-type Config struct {
+type AppConfig struct {
 	Server    string `yaml:"server"`
 	Container string `yaml:"container"`
 }
 
-func buildConfig() (*Config, error) {
+func buildConfig() (*AppConfig, error) {
 	configPath := ".remote-php.yml"
 
 	configFilename, err := filepath.Abs(configPath)
@@ -39,9 +39,9 @@ func buildConfig() (*Config, error) {
 	return config, nil
 }
 
-// readConfig reads a YAML file and returns a Config struct.
-func readConfig(filename string) (*Config, error) {
-	config := &Config{}
+// readConfig reads a YAML file and returns a AppConfig struct.
+func readConfig(filename string) (*AppConfig, error) {
+	config := &AppConfig{}
 
 	bytes, err := ioutil.ReadFile(filename)
 	if err != nil {
