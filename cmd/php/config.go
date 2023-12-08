@@ -1,12 +1,11 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	
+
 	"gopkg.in/yaml.v2"
 )
 
@@ -15,15 +14,8 @@ type Config struct {
 	Container string `yaml:"container"`
 }
 
-func GetConfig() (*Config, error) {
-	var configPath string
-
-	flag.StringVar(&configPath, "c", "", "config filename")
-	flag.Parse()
-
-	if configPath == "" {
-		configPath = ".remote-php.yml"
-	}
+func buildConfig() (*Config, error) {
+	configPath := ".remote-php.yml"
 
 	configFilename, err := filepath.Abs(configPath)
 	if err != nil {

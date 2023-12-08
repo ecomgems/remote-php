@@ -6,12 +6,13 @@ import (
 )
 
 func main() {
-	config, err := GetConfig()
+	config, err := buildConfig()
 	if err != nil {
 		fmt.Printf("encountered an error: %v", err)
 		os.Exit(1)
 		return
 	}
 
-	fmt.Printf("Server: %s, Container: %s", config.Server, config.Container)
+	fmt.Printf("server: %s, container: %s\n", config.Server, config.Container)
+	fmt.Printf("%v\n", buildPHPCommand())
 }
