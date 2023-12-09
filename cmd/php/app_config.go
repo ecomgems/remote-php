@@ -10,11 +10,17 @@ import (
 )
 
 type AppConfig struct {
-	Server    string `yaml:"server"`
-	Container string `yaml:"container"`
+	SshHost             string `yaml:"ssh_host"`
+	SshPort             int    `yaml:"ssh_port"`
+	SshUser             string `yaml:"ssh_user"`
+	SshKeyFile          string `yaml:"ssh_key_file"`
+	SshKeyFilePassword  string `yaml:"ssh_key_file_password"`
+	SshPassword         string `yaml:"ssh_password"`
+	DockerContainer     string `yaml:"docker_container"`
+	DockerContainerUser string `yaml:"docker_container_user"`
 }
 
-func buildConfig() (*AppConfig, error) {
+func buildAppConfig() (*AppConfig, error) {
 	configPath := ".remote-php.yml"
 
 	configFilename, err := filepath.Abs(configPath)
