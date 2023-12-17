@@ -10,7 +10,7 @@ func buildPhpCmd(config *AppConfig) string {
 	cmdPieces := []string{
 		"docker",
 		"exec",
-		"-it",
+		"-i",
 	}
 
 	if config.DockerContainerUser != "" {
@@ -20,7 +20,16 @@ func buildPhpCmd(config *AppConfig) string {
 	cmdPieces = append(cmdPieces, config.DockerContainer, "php")
 
 	additionalArgs := os.Args[1:]
-	cmdPieces = append(cmdPieces, additionalArgs...)
+
+	workDir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
+	for _, arg := range additionalArgs {
+		cmdPieces = append(cmdPieces, strings.ReplaceAll(arg, workDir, config.DockerContainerPath))
+	}
+
 	cmdBody := strings.Join(cmdPieces, " ")
 
 	return cmdBody

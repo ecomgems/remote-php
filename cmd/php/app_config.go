@@ -18,6 +18,7 @@ type AppConfig struct {
 	SshPassword         string `yaml:"ssh_password"`
 	DockerContainer     string `yaml:"docker_container"`
 	DockerContainerUser string `yaml:"docker_container_user"`
+	DockerContainerPath string `yaml:"docker_container_path"`
 }
 
 func buildAppConfig() (*AppConfig, error) {

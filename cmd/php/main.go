@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"golang.org/x/crypto/ssh"
-	"golang.org/x/term"
 )
 
 func main() {
@@ -40,28 +39,34 @@ func main() {
 	session.Stderr = os.Stderr
 	session.Stdin = os.Stdin
 
-	termWidth, termHeight, err := term.GetSize(int(os.Stdout.Fd()))
-	if err != nil {
-		termWidth = 80
-		termHeight = 40
-	}
+	//termWidth, termHeight, err := term.GetSize(int(os.Stdout.Fd()))
+	//if err != nil {
+	//	fmt.Println(err.Error())
+	//	termWidth = 80
+	//	termHeight = 40
+	//}
+	//
+	//_ = termWidth
+	//_ = termHeight
 
-	modes := ssh.TerminalModes{
-		ssh.ECHO:          0,
-		ssh.TTY_OP_ISPEED: 14400,
-		ssh.TTY_OP_OSPEED: 14400,
-	}
+	//
+	//modes := ssh.TerminalModes{
+	//	ssh.ECHO:          0,
+	//	ssh.TTY_OP_ISPEED: 14400,
+	//	ssh.TTY_OP_OSPEED: 14400,
+	//}
 
-	err = session.RequestPty(os.Getenv("$TERM"), termHeight, termWidth, modes)
-	if err != nil {
-		fmt.Printf("failed to request PTY for SSH session: %v\n", err)
-		os.Exit(1)
-	}
-
+	//err = session.RequestPty(os.Getenv("TERM"), termHeight, termWidth, modes)
+	//if err != nil {
+	//	fmt.Printf("failed to request PTY for SSH session: %v\n", err)
+	//	os.Exit(1)
+	//}
+	//
 	runCommand := buildPhpCmd(appConfig)
 	err = session.Run(runCommand)
 	if err != nil {
-		fmt.Printf("failed to run the command over SSH: %v\n", err)
+		fmt.Println(buildPhpCmd(appConfig))
+		//fmt.Printf("failed to run the command over SSH: %v\n", err)
 		os.Exit(1)
 	}
 }
