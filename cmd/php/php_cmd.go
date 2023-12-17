@@ -10,6 +10,7 @@ func buildPhpCmd(config *AppConfig) string {
 	cmdPieces := []string{
 		"docker",
 		"exec",
+		"-it",
 	}
 
 	if config.DockerContainerUser != "" {

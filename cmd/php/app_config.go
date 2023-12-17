@@ -11,7 +11,7 @@ import (
 
 type AppConfig struct {
 	SshHost             string `yaml:"ssh_host"`
-	SshPort             int    `yaml:"ssh_port"`
+	SshPort             string `yaml:"ssh_port"`
 	SshUser             string `yaml:"ssh_user"`
 	SshKeyFile          string `yaml:"ssh_key_file"`
 	SshKeyFilePassword  string `yaml:"ssh_key_file_password"`
